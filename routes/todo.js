@@ -52,9 +52,9 @@ router.delete("/:id", async (req, res) => {
 	}
 });
 
-const validateTodo = (todo) => {
+const validateTodo = todo => {
 	const schema = Joi.object({
-		name: Joi.string().trim().min(8).max(20).required(),
+		name: Joi.string().trim().min(5).max(20).required(),
 		description: Joi.string().trim().min(8).max(20),
 	});
 	return schema.validate(todo);

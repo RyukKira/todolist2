@@ -6,12 +6,17 @@ let storageTodo = {
 	getAll: async () => {
 		try {
 			const resultTodo = await Todo.find();
+
+			if (!resultTodo) {
+				throw new Error("No lists in the database");
+			}
+
 			return resultTodo;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
-	getOne: async (id) => {
+	getOne: async id => {
 		try {
 			let todo = await Todo.findOne({ _id: id });
 
@@ -20,39 +25,39 @@ let storageTodo = {
 			}
 			return todo;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
-	create: async (data) => {
-		let todo = new Todo(data);
-
+	create: async data => {
 		try {
-			const resultTodo = await todo.save();
-			return resultTodo.id;
+			const resultTodo = await Todo.create(data);
+			return resultTodo;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
 	updateOne: async (id, data) => {
 		try {
-			let todo = await Todo.findOne({ _id: id });
+			let todo = await Todo.findOneAndUpdate(
+				{ _id: id },
+				{ ...data },
+				{
+					new: true,
+				}
+			);
 
 			if (!todo) {
 				throw new Error("Not found in the database...");
 			}
 
-			todo.name = data.name;
-			todo.description = data.description;
-			const resultTodo = await todo.save();
-
-			return resultTodo.id;
+			return todo;
 		} catch (error) {
-			throw new Error(error.message);
+			return error.message;
 		}
 	},
-	deleteOne: async (id) => {
+	deleteOne: async id => {
 		try {
-			await Todo.findOneAndDelete({ _id: id });
+			await Todo.findByIdAndRemove({ _id: id });
 			return "Deleted";
 		} catch (error) {
 			throw new Error("Not found");

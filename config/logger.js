@@ -37,7 +37,7 @@ const logger = winston.createLogger({
 
 if (process.env.NODE_ENV !== "production") {
 	const consoleLogFormat = winston.format.printf(
-		(info) => `${info.timestamp} ${info.level} [${info.label}]: ${info.message}`
+		info => `${info.timestamp} ${info.level} [${info.label}]: ${info.message}`
 	);
 
 	logger.add(

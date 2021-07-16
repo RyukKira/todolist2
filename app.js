@@ -9,11 +9,13 @@ mongoose
 	.connect("mongodb://localhost:27017/todos", {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		useFindAndModify: false,
+		useCreateIndex: true,
 	})
 	.then(() => {
 		console.log("Connected to MongoDB...");
 	})
-	.catch((err) => console.log(err));
+	.catch(err => console.log(err));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

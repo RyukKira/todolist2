@@ -2,8 +2,9 @@ const express = require("express");
 const Joi = require("joi");
 const router = express.Router();
 const storageTodo = require("../storage/MongoDB/todo");
+const checkAuth = require('../middleware/checkAuth');
 
-router.get("/", async (req, res) => {
+router.get("/", checkAuth, async (req, res) => {
 	try {
 		const resultTodo = await storageTodo.getAll();
 		return res.status(200).send(resultTodo);

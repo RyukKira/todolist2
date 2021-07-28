@@ -4,7 +4,8 @@
 	"description": "building a todo list again",
 	"main": "app.js",
 	"scripts": {
-		"test": "jest --collectCoverage"
+		"test": "jest --collectCoverage",
+		"start:dev": "nodemon app.js"
 	},
 	"repository": {
 		"type": "git",
@@ -20,6 +21,7 @@
 	"dependencies": {
 		"express": "^4.17.1",
 		"joi": "^17.4.1",
+		"jsonwebtoken": "^8.5.1",
 		"path": "^0.12.7",
 		"uuid": "^8.3.2",
 		"uuidv4": "^6.2.11",

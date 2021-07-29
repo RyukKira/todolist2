@@ -16,6 +16,7 @@ let storageTodo = {
 			return error.message;
 		}
 	},
+
 	getOne: async id => {
 		try {
 			let todo = await Todo.findOne({ _id: id });
@@ -28,6 +29,7 @@ let storageTodo = {
 			return error.message;
 		}
 	},
+
 	create: async data => {
 		try {
 			const resultTodo = await Todo.create(data);
@@ -36,6 +38,7 @@ let storageTodo = {
 			return error.message;
 		}
 	},
+
 	updateOne: async (id, data) => {
 		try {
 			let todo = await Todo.findOneAndUpdate(
@@ -55,6 +58,7 @@ let storageTodo = {
 			return error.message;
 		}
 	},
+
 	deleteOne: async id => {
 		try {
 			await Todo.findByIdAndRemove({ _id: id });
